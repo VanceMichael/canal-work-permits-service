@@ -1,0 +1,175 @@
+{
+  "synthetic": true,
+  "records": [
+    {
+      "id": "gate-A",
+      "kind": "gate",
+      "refs": [],
+      "upstream": "source",
+      "downstream": "canal-A"
+    },
+    {
+      "id": "gate-B",
+      "kind": "gate",
+      "refs": [],
+      "upstream": "canal-A",
+      "downstream": "canal-B"
+    },
+    {
+      "id": "network-A",
+      "kind": "network",
+      "refs": [
+        "gate-A",
+        "gate-B"
+      ],
+      "edges": [
+        {
+          "from": "source",
+          "to": "canal-A",
+          "capacity": 100
+        },
+        {
+          "from": "canal-A",
+          "to": "canal-B",
+          "capacity": 60
+        },
+        {
+          "from": "canal-B",
+          "to": "village-A",
+          "capacity": 30
+        }
+      ]
+    },
+    {
+      "id": "segment-A",
+      "kind": "segment",
+      "refs": [
+        "gate-A"
+      ],
+      "isolation_requirements": [
+        "gate-A"
+      ]
+    },
+    {
+      "id": "segment-B",
+      "kind": "segment",
+      "refs": [
+        "gate-A",
+        "gate-B"
+      ],
+      "isolation_requirements": [
+        "gate-A",
+        "gate-B"
+      ]
+    },
+    {
+      "id": "village-A",
+      "kind": "supply_commitment",
+      "refs": [],
+      "minimum": 20,
+      "starts": "2026-12-06T08:00:00+08:00",
+      "ends": "2026-12-06T18:00:00+08:00"
+    },
+    {
+      "id": "backup-A",
+      "kind": "backup_supply",
+      "refs": [
+        "village-A"
+      ],
+      "capacity": 25,
+      "starts": "2026-12-06T08:00:00+08:00",
+      "ends": "2026-12-06T18:00:00+08:00"
+    },
+    {
+      "id": "work-A",
+      "kind": "work_request",
+      "refs": [
+        "segment-A"
+      ],
+      "crew": "crew-A",
+      "people": [
+        "person-A"
+      ],
+      "start": "2026-12-06T09:00:00+08:00",
+      "end": "2026-12-06T12:00:00+08:00"
+    },
+    {
+      "id": "work-B",
+      "kind": "work_request",
+      "refs": [
+        "segment-B"
+      ],
+      "crew": "crew-B",
+      "people": [
+        "person-B",
+        "person-C"
+      ],
+      "start": "2026-12-06T10:00:00+08:00",
+      "end": "2026-12-06T14:00:00+08:00"
+    },
+    {
+      "id": "backup-failure",
+      "kind": "supply_fact",
+      "refs": [
+        "backup-A"
+      ],
+      "at": "2026-12-06T11:00:00+08:00",
+      "actual_flow": 0
+    },
+    {
+      "id": "exit-A",
+      "kind": "site_fact",
+      "refs": [
+        "work-A"
+      ],
+      "at": "2026-12-06T11:30:00+08:00",
+      "people_out": [
+        "person-A"
+      ]
+    },
+    {
+      "id": "not-exited-B",
+      "kind": "site_fact",
+      "refs": [
+        "work-B"
+      ],
+      "at": "2026-12-06T11:31:00+08:00",
+      "people_out": [
+        "person-B"
+      ],
+      "people_inside": [
+        "person-C"
+      ]
+    },
+    {
+      "id": "quality-B",
+      "kind": "quality_input",
+      "refs": [
+        "segment-B",
+        "work-B"
+      ],
+      "accepted": false,
+      "reason": "接头需复检"
+    },
+    {
+      "id": "late-measurement",
+      "kind": "gate_fact",
+      "refs": [
+        "gate-A"
+      ],
+      "sequence": 8,
+      "state": "closed",
+      "measured_at": "2026-12-06T08:55:00+08:00",
+      "uploaded_at": "2026-12-06T15:00:00+08:00"
+    }
+  ],
+  "principals": {
+    "crew-user-A": "crew-A",
+    "crew-user-B": "crew-B",
+    "dispatcher-A": "dispatch",
+    "site-A": "site-safety",
+    "quality-A": "engineering-quality",
+    "receiver-A": "operations",
+    "village-user": "village-A"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "synthetic": true,
+  "commands": [
+    {
+      "id": "close-A",
+      "operation": "close",
+      "refs": [
+        "gate-A"
+      ],
+      "request": {
+        "gate": "gate-A"
+      },
+      "response_status": 504,
+      "observations": [
+        {
+          "state": "pending"
+        },
+        {
+          "state": "measured",
+          "position": "closed",
+          "sequence": 8,
+          "at": "2026-12-06T08:55:00+08:00"
+        }
+      ]
+    },
+    {
+      "id": "open-A",
+      "operation": "open",
+      "refs": [
+        "gate-A"
+      ],
+      "request": {
+        "gate": "gate-A"
+      },
+      "response_status": 504,
+      "observations": [
+        {
+          "state": "pending"
+        },
+        {
+          "state": "measured",
+          "position": "open",
+          "sequence": 9,
+          "at": "2026-12-06T14:30:00+08:00"
+        }
+      ]
+    },
+    {
+      "id": "backup-confirm",
+      "operation": "supply",
+      "refs": [
+        "backup-A"
+      ],
+      "request": {
+        "supply": "backup-A"
+      },
+      "response_status": 202,
+      "observations": [
+        {
+          "state": "delivered",
+          "actual_flow": 25,
+          "at": "2026-12-06T08:50:00+08:00"
+        }
+      ]
+    }
+  ]
+}
